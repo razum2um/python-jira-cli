@@ -1088,16 +1088,19 @@ def encode(s):
     '''Deal with unicode in text fields'''
     if s == None:
         return "None"
+    if not isinstance(s, basestring):
+        s = unicode(s)
     if type(s) == unicode:
         s = s.encode("utf-8")
-    return str(s)
+    return s
 
 def dateStr(i):
     '''TODO Why are dates from JIRA at GMT-1?
     TODO Convert to 12 hour too?'''
-    if i == None or i == 'None':
-        return str(i)
-    return "%04d/%02d/%02d %02d:%02d:%02d GMT-1" % (i[0], i[1], i[2], i[3], i[4], i[5])
+    return str(i)
+    #if i == None or i == 'None':
+    #    return str(i)
+    #return "%04d/%02d/%02d %02d:%02d:%02d GMT-1" % (i[0], i[1], i[2], i[3], i[4], i[5])
 
 def getName(id, fields):
     '''TODO cache this, and note getCustomFields() needs admin privilege'''
